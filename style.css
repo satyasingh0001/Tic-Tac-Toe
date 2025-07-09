@@ -71,3 +71,21 @@ body{
 .hide{
     display: none;
 }
+
+.draw{
+    height: 100vmin;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 4rem;   
+}
+
+#drawMsg{
+    color: #ffffc7;
+    font-size: 5vmin;
+}
+
+.hide2{
+    display: none;
+}
