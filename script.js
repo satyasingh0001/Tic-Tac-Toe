@@ -7,7 +7,7 @@ let drawContainer = document.querySelector(".draw");
 let drawMsg = document.querySelector("#drawMsg");
 
 let turnO = true; //PlayerX, PlayerY
-let count=0;
+let turn=0;
 
 const winPattern = [
     [0, 1, 2],
@@ -41,12 +41,12 @@ boxes.forEach((box) => {
             turnO = true;
         }
         box.disabled = true;
-        count ++
+        turn ++
 
        // checkWinner();
 
         let win= checkWinner();
-        if (count === 9 && !win){
+        if (turn === 9 && !win){
             showDraw();
         }
     })
