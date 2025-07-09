@@ -1,10 +1,13 @@
 let boxes = document.querySelectorAll(".box");
 let resetBtn = document.querySelector("#resetBtn");
 let newGameBtn = document.querySelector("#new-btn");
-let msgContainer = document.querySelector("div");
+let msgContainer = document.querySelector(".msgMain");
 let msg = document.querySelector("#msg");
+let drawContainer = document.querySelector(".draw");
+let drawMsg = document.querySelector("#drawMsg");
 
 let turnO = true; //PlayerX, PlayerY
+let count=0;
 
 const winPattern = [
     [0, 1, 2],
@@ -20,6 +23,7 @@ const winPattern = [
 // Function for game reset
 const resetGame = () => {
     turnO = true;
+    count = 0;
     enableBoxes();
     msgContainer.classList.add("hide");
 };
@@ -30,13 +34,21 @@ boxes.forEach((box) => {
         if (turnO) {
             box.innerText= "O";
             turnO = false;
+            box.style.color = "black";
         }else{
+            box.style.color = "#b0413e";
             box.innerText= "X";
             turnO = true;
         }
         box.disabled = true;
+        count ++
 
-        checkWinner();
+       // checkWinner();
+
+        let win= checkWinner();
+        if (count === 9 && !win){
+            showDraw();
+        }
     })
 });
 
@@ -57,12 +69,17 @@ const enableBoxes = () => {
 
 //Function to show winner.
 const showWinner = (winner) => {
-    msg.innerText = `Congratulations, Winner is ${winner}`;
+    msg.innerText = `Game win by ${winner}`;
     msgContainer.classList.remove("hide");
     disableBoxes();
 } 
 
 // Function for show draw message
+const showDraw = () => {
+    drawMsg.innerText = `Game Over.`;
+    drawContainer.classList.remove("hide2");
+    disableBoxes();
+}
 
 //function for checking winner
 const checkWinner = () => {
@@ -77,6 +94,7 @@ const checkWinner = () => {
                 //console.log("winner ",pos1val);
                 //alert(`winner ${pos1val}`);
                 showWinner(pos1val);
+                return true;
             }
         }
     }
